@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Mock.Model.Entities;
 using Mock.Model.Enums;
 
 namespace Mock.Data
 {
-    public class MockDataStore
+    public class MockDataStore : IMockDataStore
     {
         public List<SupplierInvoice> PendingInvoices { get; set; }
         public List<Bucket> Buckets { get; set; }
@@ -19,7 +16,7 @@ namespace Mock.Data
             InitilizeWithTestData();
         }
 
-        private void InitilizeWithTestData()
+        public void InitilizeWithTestData()
         {
             if(PendingInvoices == null) PendingInvoices = new List<SupplierInvoice>();
             if (Buckets == null) Buckets = new List<Bucket>();
@@ -44,7 +41,7 @@ namespace Mock.Data
             PendingInvoices.Add(CreateInvoiceItem(20, "B21403", 100.89m, "", InvoiceFlags.DEBIT, 13));
         }
 
-        private SupplierInvoice CreateInvoiceItem(int Id, string docReference,
+        public SupplierInvoice CreateInvoiceItem(int Id, string docReference,
             decimal totalAmount, string creditReference, string creditDebitFlag, int daySeed)
         {
             return new SupplierInvoice()
@@ -59,7 +56,7 @@ namespace Mock.Data
             };
         }
 
-        private Bucket CreateBucketItem(int Id, string title, int buyerComComId, int supplierComComId, string financeMethod , int status,bool isDue, int daysSeed)
+        public Bucket CreateBucketItem(int Id, string title, int buyerComComId, int supplierComComId, string financeMethod , int status,bool isDue, int daysSeed)
         {
             return new Bucket
             {
