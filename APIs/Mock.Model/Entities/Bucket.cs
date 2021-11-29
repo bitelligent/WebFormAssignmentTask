@@ -33,6 +33,8 @@ namespace Mock.Model.Entities
 
         public List<SupplierInvoice> SupplierInvoices { get; set; }
         
+        public bool IsDeleted { get; set; }
+
 
 
 
