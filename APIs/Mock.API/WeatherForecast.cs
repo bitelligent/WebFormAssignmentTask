@@ -1,3 +1,5 @@
+using System;
+
 namespace Mock.API
 {
     public class WeatherForecast
