@@ -9,8 +9,8 @@ namespace Mock.Services.Interfaces
     {
          List<Bucket> GetBucketList(BucketListRequest request);
          Bucket GetBucket(BucketDetailRequest request);
-
-         AddInvoicesResponse AddInvoices(AddInvoicesRequest request);
+         
+        AddInvoicesResponse AddInvoices(AddInvoicesRequest request);
          RemoveInvoicesResponse RemoveInvoices(RemoveInvoicesRequest request);
          DeleteBucketResponse DeleteBucket(DeleteBucketRequest request);
          SubmitBucketResponse SubmitBucket(SubmitBucketRequest request);

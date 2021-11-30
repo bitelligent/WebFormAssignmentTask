@@ -8,7 +8,7 @@ namespace Mock.Data.Interfaces
     {
          List<Bucket> GetBucketList();
          Bucket GetBucket(int id);
-
+         
          AddInvoicesOperationResult AddInvoices(int id, List<int> invoiceIds);
          RemoveInvoicesOperationResult RemoveInvoices(int id, List<int> invoiceIds);
          DeleteBucketOperationResult DeleteBucket(int id);
