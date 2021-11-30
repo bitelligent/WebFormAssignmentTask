@@ -41,23 +41,28 @@ namespace Mock.API.Controllers
 
         }
 
+        [HttpGet]
         [Route("bucketDetails")]
-        public ActionResult<BucketDetailResponse> BucketDetails([FromBody] BucketDetailRequest request)
+        public ActionResult<BucketDetailResponse> BucketDetails(int bucketId)
         {
+            var request = new BucketDetailRequest() {BucketId = bucketId};
             var bucket = _bucketService.GetBucket(request);
-            var response = new BucketDetailResponse();
-            response.Success = true;
-            response.Bucket = _mapper.Map<BucketViewModel>(bucket);
+            var response = new BucketDetailResponse
+                {Success = true,
+                    Bucket = _mapper.Map<BucketViewModel>(bucket)};
             return Ok(response);
         }
 
+        [HttpGet]
         [Route("buckets")]
-        public ActionResult<BucketListResponse> BucketDetails([FromBody] BucketListRequest request)
+        public ActionResult<BucketListResponse> Buckets()
         {
+            var request = new BucketListRequest();
             var buckets = _bucketService.GetBucketList(request);
-            var response = new BucketListResponse();
-            response.Success = true;
-            response.Buckets = _mapper.Map<List<BucketViewModel>>(buckets);
+            var response = new BucketListResponse
+            {
+                Success = true, Buckets = _mapper.Map<List<BucketViewModel>>(buckets)
+            };
 
 
             return Ok(response);
@@ -74,7 +79,7 @@ namespace Mock.API.Controllers
         }
 
 
-
+        [HttpGet]
         [Route("pendingInvoices")]
         public ActionResult<PendingInvoiceListResponse> PendingInvoices()
         {

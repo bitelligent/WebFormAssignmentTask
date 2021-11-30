@@ -2,7 +2,7 @@
 
 namespace Application.Common.Messages.Bucket.Requests
 {
-    public class RemoveInvoicesRequest : BasketBaseRequest
+    public class RemoveInvoicesRequest : BucketBaseRequest
     {
         public List<int> InvoiceIds { get; set; }
     }

@@ -1,6 +1,6 @@
 ﻿namespace Application.Common.Messages.Bucket.Requests
 {
-    public class DeleteBucketRequest : BasketBaseRequest
+    public class BucketDetailRequest : BucketBaseRequest
     {
     }
 }

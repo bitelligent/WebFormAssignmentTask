@@ -2,7 +2,7 @@
 
 namespace Application.Common.Messages.Bucket.Requests
 {
-    public class UpdateDateRequest : BasketBaseRequest
+    public class UpdateDateRequest : BucketBaseRequest
     {
         public DateTime UpdateDate { get; set; }
     }

@@ -28,14 +28,14 @@ namespace Mock.Services.Implementations
 
         public Bucket GetBucket(BucketDetailRequest request)
         {
-            return _bucketRepository.GetBucket(request.BasketId);
+            return _bucketRepository.GetBucket(request.BucketId);
         }
 
         public AddInvoicesResponse AddInvoices(AddInvoicesRequest request)
         {
             var response = new AddInvoicesResponse();
 
-            var addInvoicesOperation = _bucketRepository.AddInvoices(request.BasketId, request.InvoiceIds);
+            var addInvoicesOperation = _bucketRepository.AddInvoices(request.BucketId, request.InvoiceIds);
 
             if (addInvoicesOperation == AddInvoicesOperationResult.Success)
                 response.Success = true;
@@ -53,7 +53,7 @@ namespace Mock.Services.Implementations
         {
             var response = new RemoveInvoicesResponse();
 
-            var removeInvoicesOperation = _bucketRepository.RemoveInvoices(request.BasketId,request.InvoiceIds);
+            var removeInvoicesOperation = _bucketRepository.RemoveInvoices(request.BucketId,request.InvoiceIds);
 
             if (removeInvoicesOperation == RemoveInvoicesOperationResult.Success)
                 response.Success = true;
@@ -72,7 +72,7 @@ namespace Mock.Services.Implementations
 
             var response = new DeleteBucketResponse();
 
-            var deleteBucketResult = _bucketRepository.DeleteBucket(request.BasketId);
+            var deleteBucketResult = _bucketRepository.DeleteBucket(request.BucketId);
 
             if (deleteBucketResult == DeleteBucketOperationResult.Success)
                 response.Success = true;
@@ -87,7 +87,7 @@ namespace Mock.Services.Implementations
             
             var response = new SubmitBucketResponse();
 
-           var submitBucketResult = _bucketRepository.SubmitBucket(request.BasketId);
+           var submitBucketResult = _bucketRepository.SubmitBucket(request.BucketId);
 
            if (submitBucketResult == SubmitBucketOperationResult.Success)
                response.Success = true;
@@ -105,7 +105,7 @@ namespace Mock.Services.Implementations
         {
             var response = new UpdateDateResponse();
 
-            var updateDateResult = _bucketRepository.UpdateDate(request.BasketId, request.UpdateDate);
+            var updateDateResult = _bucketRepository.UpdateDate(request.BucketId, request.UpdateDate);
             if (updateDateResult == UpdateDateOperationResult.Success)
                 response.Success = true;
             if (updateDateResult == UpdateDateOperationResult.BucketNotFound)
