@@ -20,10 +20,10 @@ namespace Mock.API.Controllers
     public class BucketController : ControllerBase
     {
         private readonly IBucketService _bucketService;
-        private readonly IInvoiceService _invoiceService;
+        private readonly IInvoiceService _invoiceService; 
         private readonly IMapper _mapper;
 
-        public BucketController(IBucketService bucketService,IInvoiceService invoiceService , IMapper mapper)
+        public BucketController(IBucketService bucketService, IInvoiceService invoiceService, IMapper mapper)
         {
             _bucketService = bucketService;
             _invoiceService = invoiceService;
@@ -32,15 +32,16 @@ namespace Mock.API.Controllers
 
         [HttpPost]
         [Route("approve")]
-        [ProducesResponseType(typeof(SubmitBucketResponse), (int)HttpStatusCode.OK)]
         public ActionResult<SubmitBucketResponse> Approve([FromBody] SubmitBucketRequest request)
         {
             var response = _bucketService.SubmitBucket(request);
-            return Ok(response);
+            if (response.Success)
+                return Accepted(response);
+            else return BadRequest(response.ErrorMessage);
+
         }
 
         [Route("bucketDetails")]
-        [ProducesResponseType(typeof(BucketDetailResponse), (int)HttpStatusCode.OK)]
         public ActionResult<BucketDetailResponse> BucketDetails([FromBody] BucketDetailRequest request)
         {
             var bucket = _bucketService.GetBucket(request);
@@ -51,7 +52,6 @@ namespace Mock.API.Controllers
         }
 
         [Route("buckets")]
-        [ProducesResponseType(typeof(BucketListResponse), (int)HttpStatusCode.OK)]
         public ActionResult<BucketListResponse> BucketDetails([FromBody] BucketListRequest request)
         {
             var buckets = _bucketService.GetBucketList(request);
@@ -65,8 +65,7 @@ namespace Mock.API.Controllers
 
         [HttpPost]
         [Route("delete")]
-        [ProducesResponseType(typeof(DeleteBucketResponse), (int)HttpStatusCode.OK)]
-        public ActionResult<DeleteBucketResponse> BucketDetails([FromBody] DeleteBucketRequest request)
+        public ActionResult<DeleteBucketResponse> Delete([FromBody] DeleteBucketRequest request)
         {
             var response = _bucketService.DeleteBucket(request);
             if (response.Success)
@@ -75,9 +74,8 @@ namespace Mock.API.Controllers
         }
 
 
-        
+
         [Route("pendingInvoices")]
-        [ProducesResponseType(typeof(PendingInvoiceListResponse), (int)HttpStatusCode.OK)]
         public ActionResult<PendingInvoiceListResponse> PendingInvoices()
         {
             var request = new PendingInvoiceListRequest();
@@ -91,5 +89,36 @@ namespace Mock.API.Controllers
             return Ok(response);
         }
 
+        [HttpPost]
+        [Route("relate")]
+        public ActionResult<AddInvoicesResponse> Relate([FromBody] AddInvoicesRequest request)
+        {
+            var response = _bucketService.AddInvoices(request);
+            if (response.Success)
+                return Accepted(response);
+            else return BadRequest(response.ErrorMessage);
+        }
+
+        [HttpPost]
+        [Route("unrelate")]
+        public ActionResult<RemoveInvoicesResponse> UnRelate([FromBody] RemoveInvoicesRequest request)
+        {
+            var response = _bucketService.RemoveInvoices(request);
+            if (response.Success)
+                return Accepted(response);
+            else return BadRequest(response.ErrorMessage);
+
+        }
+
+        [HttpPost]
+        [Route("updatedate")]
+        public ActionResult<UpdateDateResponse> UpdateDate([FromBody] UpdateDateRequest request)
+        {
+            var response = _bucketService.UpdateDate(request);
+            if (response.Success)
+                return Accepted(response);
+            else return BadRequest(response.ErrorMessage);
+
+        }
     }
 }

@@ -14,6 +14,7 @@ namespace Mock.Services.Interfaces
          RemoveInvoicesResponse RemoveInvoices(RemoveInvoicesRequest request);
          DeleteBucketResponse DeleteBucket(DeleteBucketRequest request);
          SubmitBucketResponse SubmitBucket(SubmitBucketRequest request);
+         UpdateDateResponse UpdateDate(UpdateDateRequest request);
 
 
     }

@@ -11,6 +11,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Mock.Data;
+using Mock.Data.Implementations;
+using Mock.Data.Interfaces;
+using Mock.Services.Implementations;
+using Mock.Services.Interfaces;
 
 namespace Mock.API
 {
@@ -26,6 +31,14 @@ namespace Mock.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<IMockDataStore, MockDataStore>();
+            services.AddScoped<IBucketRepository,BucketRepository>();
+            services.AddScoped<IInvoiceRepository, InvoiceRepository>();
+
+            services.AddScoped<IBucketService, BucketService>();
+            services.AddScoped<IInvoiceService, InvoiceService>();
+
+            services.AddAutoMapper(typeof(Startup));
 
             services.AddControllers();
             services.AddSwaggerGen(c =>

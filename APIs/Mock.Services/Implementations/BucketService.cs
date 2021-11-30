@@ -101,5 +101,19 @@ namespace Mock.Services.Implementations
 
         }
 
+        public UpdateDateResponse UpdateDate(UpdateDateRequest request)
+        {
+            var response = new UpdateDateResponse();
+
+            var updateDateResult = _bucketRepository.UpdateDate(request.BasketId, request.UpdateDate);
+            if (updateDateResult == UpdateDateOperationResult.Success)
+                response.Success = true;
+            if (updateDateResult == UpdateDateOperationResult.BucketNotFound)
+                response.ErrorMessage = "Bucket Not Found";
+
+            return response;
+
+
+        }
     }
 }

@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using Application.Common.Messages.Bucket.Responses;
 using Mock.Data.Interfaces;
 using Mock.Model.Entities;
 using Mock.Model.Enums;
@@ -113,9 +115,17 @@ namespace Mock.Data.Implementations
 
         }
 
-        public List<SupplierInvoice> GetPendingInvoices()
+   
+
+        public UpdateDateOperationResult UpdateDate(int id, DateTime date)
         {
-            throw new System.NotImplementedException();
+            var bucket = GetBucket(id);
+            if (bucket == null) return UpdateDateOperationResult.BucketNotFound;
+
+            bucket.FutureFinanceDate = date;
+
+            return UpdateDateOperationResult.Success;
+
         }
     }
 }

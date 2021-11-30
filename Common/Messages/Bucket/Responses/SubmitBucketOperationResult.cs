@@ -1,4 +1,4 @@
-﻿namespace Mock.Model.Enums
+﻿namespace Application.Common.Messages.Bucket.Responses
 {
     public enum SubmitBucketOperationResult
     {
