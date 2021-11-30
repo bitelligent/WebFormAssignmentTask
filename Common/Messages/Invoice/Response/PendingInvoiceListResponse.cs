@@ -6,6 +6,7 @@ namespace Application.Common.Messages.Invoice.Response
 {
     public class PendingInvoiceListResponse 
     {
+        public bool Success { get; set; }
         public List<InvoiceViewModel> PendingInvoices { get; set; }
     }
 }

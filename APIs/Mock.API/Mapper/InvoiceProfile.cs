@@ -8,12 +8,11 @@ using Mock.Model.Entities;
 
 namespace Mock.API.Mapper
 {
-    public class BucketProfile : Profile
+    public class InvoiceProfile : Profile
     {
-        public BucketProfile()
+        public InvoiceProfile()
         {
-            CreateMap<Bucket, BucketViewModel>().ReverseMap();
-          
+            CreateMap<SupplierInvoice, InvoiceViewModel>().ReverseMap();
 
 
         }

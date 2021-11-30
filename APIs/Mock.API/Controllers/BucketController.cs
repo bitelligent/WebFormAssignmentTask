@@ -5,6 +5,7 @@ using Application.Common.Messages.Invoice.Response;
 using Application.Common.ViewModels;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Mock.Model.Entities;
 using Mock.Services.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -82,7 +83,8 @@ namespace Mock.API.Controllers
             var request = new PendingInvoiceListRequest();
             var invoices = _invoiceService.PendingInvoices(request);
             var response = new PendingInvoiceListResponse();
-            
+            response.Success = true;
+            response.PendingInvoices = _mapper.Map<List<InvoiceViewModel>>(invoices);
 
 
 
