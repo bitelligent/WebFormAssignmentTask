@@ -7,8 +7,10 @@ namespace Mock.Data
     {
         List<SupplierInvoice> PendingInvoices { get; set; }
         List<Bucket> Buckets { get; set; }
-        void InitilizeWithTestData();
-
+        List<Bucket> PopulateBaskets();
+        List<SupplierInvoice> PopulatePendingInvoices();
+        void WriteBucketsToFileDatabase(List<Bucket> buckets);
+        void WritePendingInvoicesToDatabase(List<SupplierInvoice> invoices);
         SupplierInvoice CreateInvoiceItem(int Id, string docReference,
             decimal totalAmount, string creditReference, string creditDebitFlag, int daySeed);
 

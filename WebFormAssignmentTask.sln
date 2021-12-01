@@ -21,6 +21,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mock.API", "APIs\Mock.API\M
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.Common", "Common\Application.Common\Application.Common.csproj", "{FA748654-F44E-4485-B216-B3771379E205}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebForms.Services", "WebForms.Services\WebForms.Services.csproj", "{CDFB7044-1BC1-48A8-9888-3A30B16CA96B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{FA748654-F44E-4485-B216-B3771379E205}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FA748654-F44E-4485-B216-B3771379E205}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FA748654-F44E-4485-B216-B3771379E205}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CDFB7044-1BC1-48A8-9888-3A30B16CA96B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CDFB7044-1BC1-48A8-9888-3A30B16CA96B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CDFB7044-1BC1-48A8-9888-3A30B16CA96B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CDFB7044-1BC1-48A8-9888-3A30B16CA96B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -62,6 +68,7 @@ Global
 		{32424CF0-B1BA-462A-AD06-6372511787B9} = {B4CE6754-ADCF-45EA-9D97-7DB416964B3B}
 		{9E363B15-AE24-4DD2-A69A-DAB930DB029F} = {B4CE6754-ADCF-45EA-9D97-7DB416964B3B}
 		{FA748654-F44E-4485-B216-B3771379E205} = {427A32B1-533F-4885-A24D-5A2C04FEFDAD}
+		{CDFB7044-1BC1-48A8-9888-3A30B16CA96B} = {281E10BB-6C6F-4C1B-BEF4-BB1D4CB52874}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E65111E5-C594-42FC-9DAF-5DE7C4FAC897}

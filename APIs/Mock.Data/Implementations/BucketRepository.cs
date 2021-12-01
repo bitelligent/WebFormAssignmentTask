@@ -28,8 +28,12 @@ namespace Mock.Data.Implementations
 
         public AddInvoicesOperationResult AddInvoices(int id, List<int> invoiceIds)
         {
+            var bucketList = GetBucketList();
+            var pendingInvoices = _dataStore.PendingInvoices;
+
+            
             //lets find bucket first 
-            var bucket = GetBucket(id);
+            var bucket = bucketList.FirstOrDefault(b => b.Id == id);
 
             //if not found then return not found status
             if (bucket == null) return AddInvoicesOperationResult.BucketNotFound;
@@ -46,14 +50,17 @@ namespace Mock.Data.Implementations
                 if (bucketAlreadyContainsInvoice) continue;
                 
                 
-                    var pendingInvoiceItem = _dataStore.PendingInvoices.FirstOrDefault(p => p.Id == invoiceId);
+                    var pendingInvoiceItem = pendingInvoices.FirstOrDefault(p => p.Id == invoiceId);
                     if (pendingInvoiceItem == null) return AddInvoicesOperationResult.InvoiceItemNotFound;
 
                     bucket.SupplierInvoices.Add(pendingInvoiceItem);
-                
+
                 //remove invoice from the pending list
-                _dataStore.PendingInvoices.Remove(pendingInvoiceItem);
+                pendingInvoices.Remove(pendingInvoiceItem);
             }
+
+            _dataStore.WriteBucketsToFileDatabase(bucketList);
+            _dataStore.WritePendingInvoicesToDatabase(pendingInvoices);
 
             return AddInvoicesOperationResult.Success;
 
@@ -62,8 +69,15 @@ namespace Mock.Data.Implementations
         public RemoveInvoicesOperationResult RemoveInvoices(int id, List<int> invoiceIds)
         {
 
+            var bucketList = GetBucketList();
+            var pendingInvoices = _dataStore.PendingInvoices;
+
+
             //lets find bucket first 
-            var bucket = GetBucket(id);
+            var bucket = bucketList.FirstOrDefault(b => b.Id == id);
+
+            //lets find bucket first 
+           
 
             //if not found then return not found status
             if (bucket == null) return RemoveInvoicesOperationResult.BucketNotFound;
@@ -85,8 +99,11 @@ namespace Mock.Data.Implementations
                 bucket.SupplierInvoices.Remove(bucketInvoice);
 
                 //put invoice item back into pending list
-                _dataStore.PendingInvoices.Add(bucketInvoice);
+                pendingInvoices.Add(bucketInvoice);
             }
+
+            _dataStore.WriteBucketsToFileDatabase(bucketList);
+            _dataStore.WritePendingInvoicesToDatabase(pendingInvoices);
 
             return RemoveInvoicesOperationResult.Success;
 
@@ -95,22 +112,31 @@ namespace Mock.Data.Implementations
 
         public DeleteBucketOperationResult DeleteBucket(int id)
         {
-            var bucket = GetBucket(id);
+            var bucketList = GetBucketList();
+
+            var bucket = bucketList.FirstOrDefault(b => b.Id == id);
             if (bucket == null) return DeleteBucketOperationResult.BucketNotFound;
 
-            _dataStore.Buckets.Remove(bucket);
+            bucketList.Remove(bucket);
+
+            _dataStore.WriteBucketsToFileDatabase(bucketList);
 
             return DeleteBucketOperationResult.Success;
         }
 
         public SubmitBucketOperationResult SubmitBucket(int id)
         {
-            var bucket = GetBucket(id);
+            var bucketList = GetBucketList();
+            var bucket = bucketList.FirstOrDefault(b => b.Id == id);
+           
             if (bucket == null) return SubmitBucketOperationResult.BucketNotFound;
 
             bucket.Status = (int)BucketStatus.Submitted;
 
+            _dataStore.WriteBucketsToFileDatabase(bucketList);
+
             return SubmitBucketOperationResult.Success;
+
 
 
         }
@@ -119,10 +145,14 @@ namespace Mock.Data.Implementations
 
         public UpdateDateOperationResult UpdateDate(int id, DateTime date)
         {
-            var bucket = GetBucket(id);
+            var bucketList = GetBucketList();
+            var bucket = bucketList.FirstOrDefault(b => b.Id == id);
+            
             if (bucket == null) return UpdateDateOperationResult.BucketNotFound;
 
             bucket.FutureFinanceDate = date;
+
+            _dataStore.WriteBucketsToFileDatabase(bucketList);
 
             return UpdateDateOperationResult.Success;
 
